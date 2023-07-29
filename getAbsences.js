@@ -1,6 +1,10 @@
+const absencesDurationConfig = {
+  'celý den': true,
+  dopoledne: true,
+  odpoledne: false,
+};
+
 const getAbsences = async () => {
-  const pattern = /<td>(celý den|dopoledne|odpoledne)<\/td>/g;
-  const table = /<div id="snippet-showAbsences-grid">(.*)<\/table>/g;
   const response = await fetch('https://report.livesport.eu/absences/', {
     headers: {
       Cookie:
@@ -14,12 +18,61 @@ const getAbsences = async () => {
     return 'You are not logged in';
   }
 
-  const matches = html.match(pattern);
+  const absencesData = parseAbsencesHtml(html);
 
-  return matches ? matches.length : 0;
-
-  return html;
+  return filterAbsencesFromThisMonth(absencesData);
 };
+
+function filterAbsencesFromThisMonth(absences) {
+  if (absences.length === 0) {
+    return [];
+  }
+
+  const date = new Date();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  return absences.filter(
+    (absence) =>
+      absence.date.month === month &&
+      absence.date.year === year &&
+      absencesDurationConfig[absence.duration]
+  );
+}
+
+function parseAbsencesHtml(html) {
+  const regexForAbsencesTable = /id="snippet-showAbsences-grid"(.*?)id="lb_absences"/s;
+  const matchForAbsencesTable = html.match(regexForAbsencesTable);
+
+  if (!matchForAbsencesTable) {
+    return [];
+  }
+
+  const regexForTD = /<td>(.*?)<\/td>/g;
+
+  const htmlWithAbsencesTable = matchForAbsencesTable[0];
+
+  const tableColumns = htmlWithAbsencesTable.match(regexForTD);
+  const columnsPerRow = 4;
+
+  const data = [];
+  for (let i = 0; i < tableColumns.length; i += columnsPerRow) {
+    const dateString = tableColumns[i + 0].match(/<td>(.*?)<\/td>/)[1];
+    const type = tableColumns[i + 1].match(/<td>(.*?)<\/td>/)[1];
+    const duration = tableColumns[i + 2].match(/<td>(.*?)<\/td>/)[1];
+
+    const dateParts = dateString.split('.');
+    const day = parseInt(dateParts[0], 10);
+    const month = parseInt(dateParts[1], 10);
+    const year = parseInt(dateParts[2], 10);
+
+    const date = { day, month, year };
+
+    data.push({ date, type, duration });
+  }
+
+  return data;
+}
 
 getAbsences().then((absences) => {
   console.log(absences);

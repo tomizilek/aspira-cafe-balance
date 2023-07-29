@@ -15,15 +15,19 @@ Changelog:
 // Set this parameter to true if your working mode is full-time, or false otherwise.
 const isFulltime = true;
 // When do you usually finish your lunch? eg. 1140
-const timeWhenLunchIsOver = 1135;
+const timeWhenLunchIsOver = 1130;
 // Set your report cookie from https://report.livesport.eu/absences/
 const reportCookie =
-  '_hjSessionUser_2003820=eyJpZCI6ImJjNjk4OGY5LTBhMGQtNTUwYS1iYmY0LTI1NThjZTVjM2E0OSIsImNyZWF0ZWQiOjE2ODQzMTQ5MTg1NjYsImV4aXN0aW5nIjp0cnVlfQ==; OptanonAlertBoxClosed=2023-05-23T12:34:36.074Z; eupubconsent-v2=CPsNvrAPsNvrAAcABBENDECsAP_AAAAAAChQJGtf_X__b2_j-_5_f_t0eY1P9_7_v-0zjhfdl-8N2f_X_L8X52M7vF36pq4KuR4ku3LBIQVlHOHcDUmw6okVryPsbk2cr7NKJ7PEmnMbO2dYGH9_n13T-ZKY7___f__z_v-v________7-3f3__p___-2_e_V_99zfn9_____9vP___9v-_9_3gAAAAAAAAAAAAD4AAABwkAIAGgC8xUAEBeYyACAvMdAEABoAGYAZQC8yEAIAMwAyiUAMAMwAygF5lIAgANAAzADKAXmAAA.f_gAAAAAAAAA; _ga=GA1.1.1531466603.1684845271; OptanonConsent=isGpcEnabled=0&datestamp=Tue+May+23+2023+14%3A34%3A36+GMT%2B0200+(Central+European+Summer+Time)&version=202210.1.0&isIABGlobal=false&hosts=&consentId=25ee32de-59ff-490a-95f2-7989298a2065&interactionCount=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0002%3A1%2CC0004%3A1%2CSTACK42%3A1; _fbp=fb.1.1684845276160.1973073325; _gcl_au=1.1.978096959.1684845276; _ga_SGLS8CHCVG=GS1.1.1684845271.1.1.1684845283.53.0.0; PHPSESSID=64320d52d65bcdfacca033bf3d98b893; _oauth2_proxy_kc_sso_livesport_eu=X29hdXRoMl9wcm94eV9rY19zc29fbGl2ZXNwb3J0X2V1LTU3Y2YxMTY5ZWJjYmQ1NTY5MDM3MWEyNTgzMzhmZDJkLkI4WDlESG5fMERZQWNrcnRiQy1xcXc=|1690358333|n0W7RASvTtgA-1qAbwzivB12Gf6oN1QCOl3EDap-a58=';
+  '_hjSessionUser_2003820=eyJpZCI6ImJjNjk4OGY5LTBhMGQtNTUwYS1iYmY0LTI1NThjZTVjM2E0OSIsImNyZWF0ZWQiOjE2ODQzMTQ5MTg1NjYsImV4aXN0aW5nIjp0cnVlfQ==; OptanonAlertBoxClosed=2023-05-23T12:34:36.074Z; eupubconsent-v2=CPsNvrAPsNvrAAcABBENDECsAP_AAAAAAChQJGtf_X__b2_j-_5_f_t0eY1P9_7_v-0zjhfdl-8N2f_X_L8X52M7vF36pq4KuR4ku3LBIQVlHOHcDUmw6okVryPsbk2cr7NKJ7PEmnMbO2dYGH9_n13T-ZKY7___f__z_v-v________7-3f3__p___-2_e_V_99zfn9_____9vP___9v-_9_3gAAAAAAAAAAAAD4AAABwkAIAGgC8xUAEBeYyACAvMdAEABoAGYAZQC8yEAIAMwAyiUAMAMwAygF5lIAgANAAzADKAXmAAA.f_gAAAAAAAAA; _ga=GA1.1.1531466603.1684845271; OptanonConsent=isGpcEnabled=0&datestamp=Tue+May+23+2023+14%3A34%3A36+GMT%2B0200+(Central+European+Summer+Time)&version=202210.1.0&isIABGlobal=false&hosts=&consentId=25ee32de-59ff-490a-95f2-7989298a2065&interactionCount=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0002%3A1%2CC0004%3A1%2CSTACK42%3A1; _fbp=fb.1.1684845276160.1973073325; _gcl_au=1.1.978096959.1684845276; _ga_SGLS8CHCVG=GS1.1.1684845271.1.1.1684845283.53.0.0; nette-browser=ysf3xskvsv; _ga_QC62MH0F1B=GS1.1.1690468056.1.1.1690468925.0.0.0; PHPSESSID=4f18be5aaa81ea71295539ef8f231fe3; _oauth2_proxy_kc_sso_livesport_eu=X29hdXRoMl9wcm94eV9rY19zc29fbGl2ZXNwb3J0X2V1LTViNjQ5OTdmMmMyMDRhODRhNGY5M2Y1MTI2ZDEwMzgxLllSUVROcS1WeUZSU1VXY0RTeFdYVHc=|1690626236|VnKP-dxvoOSPXnrFMTu9ZrOrFg_rXbV9NkgSYx_ZwHA=';
 // Set your login credentials from https://aspira.septim.cz/login
 const user = 'tomas.novotny@livesport.eu';
 const password = 'tnovotny';
-// Set which options from "celý den", "dopoledne", "odpoledne" should be counted as absences
-const regexForAbsences = /<td>(celý den|dopoledne|odpoledne)<\/td>/g;
+// Set which options from should be counted as absences (true = counted, false = not counted)
+const absencesDurationConfig = {
+  'celý den': true,
+  dopoledne: true,
+  odpoledne: true,
+};
 const HOLIDAY_DATES_2023 = [
   '1.1.',
   '7.4.',
@@ -116,17 +120,69 @@ absencesRequest.headers = {
 
 const absencesResponse = await absencesRequest.loadString();
 const reportCookieExpired = absencesResponse.includes('Livesport login');
-let numberOfAbsences;
 
-if (reportCookieExpired) {
-  numberOfAbsences = 0;
-} else {
-  const absencesMatch = absencesResponse.match(regexForAbsences);
-  numberOfAbsences = absencesMatch ? absencesMatch.length : 0;
+// ABSENCES HTML PARSING ---------------------------------
+function filterAbsencesFromThisMonth(absences) {
+  if (absences.length === 0) {
+    return [];
+  }
+
+  const date = new Date();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  return absences.filter(
+    (absence) =>
+      absence.date.month === month &&
+      absence.date.year === year &&
+      absencesDurationConfig[absence.duration]
+  );
 }
 
+function parseAbsencesHtml(html) {
+  const regexForAbsencesTable = /id="snippet-showAbsences-grid"(.*?)id="lb_absences"/s;
+  const matchForAbsencesTable = html.match(regexForAbsencesTable);
+
+  if (!matchForAbsencesTable) {
+    return [];
+  }
+
+  const regexForTD = /<td>(.*?)<\/td>/g;
+
+  const htmlWithAbsencesTable = matchForAbsencesTable[0];
+
+  const tableColumns = htmlWithAbsencesTable.match(regexForTD);
+  const columnsPerRow = 4;
+
+  const data = [];
+  for (let i = 0; i < tableColumns.length; i += columnsPerRow) {
+    const dateString = tableColumns[i + 0].match(/<td>(.*?)<\/td>/)[1];
+    const type = tableColumns[i + 1].match(/<td>(.*?)<\/td>/)[1];
+    const duration = tableColumns[i + 2].match(/<td>(.*?)<\/td>/)[1];
+
+    const dateParts = dateString.split('.');
+    const day = parseInt(dateParts[0], 10);
+    const month = parseInt(dateParts[1], 10);
+    const year = parseInt(dateParts[2], 10);
+
+    const date = { day, month, year };
+
+    data.push({ date, type, duration });
+  }
+
+  return data;
+}
+// ABSENCES COUNT -------------------------------------
+let numberOfAbsences = 0;
+if (!reportCookieExpired) {
+  const absences = parseAbsencesHtml(absencesResponse);
+  numberOfAbsences = filterAbsencesFromThisMonth(absences).length;
+}
+
+// REMAINING WORK DAYS COUNT --------------------------
 const remainingWorkDays = returnNumberOfRemainingWorkDays() - numberOfAbsences;
 
+// WIDGET ---------------------------------------------
 let widget = createWidget(balance, isFulltime);
 if (config.runsInWidget) {
   Script.setWidget(widget);
@@ -155,7 +211,12 @@ function createWidget(balance, isFulltime) {
   let rounded = Number(amount).toFixed(0);
   let amountTxt = w.addText(rounded + ' CZK');
   w.addSpacer(2);
-  let balancePerDayTxt = w.addText(Number(rounded / remainingWorkDays).toFixed(0) + ' per day');
+
+  const balanceForDay =
+    remainingWorkDays > 0
+      ? Number(rounded / remainingWorkDays).toFixed(0)
+      : Number(rounded).toFixed(0);
+  let balancePerDayTxt = w.addText(balanceForDay + ' per day');
   w.addSpacer(1);
   let remainingDaysTxt = w.addText(`${remainingWorkDays} days left (${numberOfAbsences} abs.)`);
 

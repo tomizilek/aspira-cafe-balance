@@ -3,14 +3,14 @@
 // icon-color: deep-brown; icon-glyph: coffee;
 /* --------------------------------------------------------------
 Script: Aspira.js
-Author: Michal Klement
-Version: 1.0.0
+Author: Michal Klement & Tomáš Novotný
+Version: 2.0.0
 
 Description:
 Aspira Cafe balance
 
 Changelog:
-1.0.0: Initial version
+2.0.0: Absences from Report and balance per day
 -------------------------------------------------------------- */
 // Set this parameter to true if your working mode is full-time, or false otherwise.
 const isFulltime = true;

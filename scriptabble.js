@@ -21,7 +21,7 @@ const reportCookie = '';
 // Set your login credentials from https://aspira.septim.cz/login
 const user = '';
 const password = '';
-// Set which options from should be counted as absences (true = counted, false = not counted)
+// Set which options should be counted as absences (true = counted, false = not counted)
 const absencesDurationConfig = {
   'celý den': true,
   dopoledne: true,
@@ -212,9 +212,7 @@ function createWidget(balance, isFulltime) {
   w.addSpacer(2);
 
   const balanceForDay =
-    remainingWorkDays > 0
-      ? Number(rounded / remainingWorkDays).toFixed(0)
-      : Number(rounded).toFixed(0);
+    remainingWorkDays > 0 ? Number(rounded / remainingWorkDays).toFixed(0) : rounded;
   let balancePerDayTxt = w.addText(balanceForDay + ' per day');
   w.addSpacer(1);
   let remainingDaysTxt = w.addText(`${remainingWorkDays} days left (${numberOfAbsences} abs.)`);

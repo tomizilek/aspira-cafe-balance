@@ -16,7 +16,7 @@ Changelog:
 const isFulltime = true;
 // When do you usually finish your lunch? eg. 1140
 const timeWhenLunchIsOver = 1130;
-// Set your report cookie from https://report.livesport.eu/absences/
+// Set your '_oauth2_proxy_kc_sso_livesport_eu' cookie from https://report.livesport.eu/absences/
 const reportCookie = '';
 // Set your login credentials from https://aspira.septim.cz/login
 const user = '';

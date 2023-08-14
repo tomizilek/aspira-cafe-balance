@@ -114,7 +114,7 @@ const balance = res.balance;
 // ABSENCES REQUEST -------------------------------------
 const absencesRequest = new Request('https://report.livesport.eu/absences/');
 absencesRequest.headers = {
-  Cookie: `_oauth2_proxy_kc_sso_livesport_eu=${reportCookie}}`,
+  Cookie: `_oauth2_proxy_kc_sso_livesport_eu=${reportCookie}`,
 };
 
 const absencesResponse = await absencesRequest.loadString();

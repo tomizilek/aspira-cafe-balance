@@ -4,11 +4,13 @@ const absencesDurationConfig = {
   odpoledne: false,
 };
 
+// Set your '_oauth2_proxy_kc_sso_livesport_eu' cookie
+const oauthCookie = '';
+
 const getAbsences = async () => {
   const response = await fetch('https://report.livesport.eu/absences/', {
     headers: {
-      Cookie:
-        '_oauth2_proxy_kc_sso_livesport_eu=X29hdXRoMl9wcm94eV9rY19zc29fbGl2ZXNwb3J0X2V1LTUwZDY4YmY3MmExMjFiZGI1MDNkYjY0NGNmNTk1MGZjLlZOQ1dmb214Mm9RWjhJMWJUSXZTbVE=|1692003239|k2bff8Ey3tIdpObMmVO1Y9YMwBi0TlNza0BiNFMc_5s=',
+      Cookie: `_oauth2_proxy_kc_sso_livesport_eu=${oauthCookie}`,
     },
   });
 

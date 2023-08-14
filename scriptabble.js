@@ -114,7 +114,7 @@ const balance = res.balance;
 // ABSENCES REQUEST -------------------------------------
 const absencesRequest = new Request('https://report.livesport.eu/absences/');
 absencesRequest.headers = {
-  Cookie: reportCookie,
+  Cookie: `_oauth2_proxy_kc_sso_livesport_eu=${reportCookie}}`,
 };
 
 const absencesResponse = await absencesRequest.loadString();
@@ -134,7 +134,7 @@ function filterAbsencesFromThisMonth(absences) {
     (absence) =>
       absence.date.month === month &&
       absence.date.year === year &&
-      absencesDurationConfig[absence.duration]
+      (absencesDurationConfig[absence.duration] || absence.type === 'dovolená')
   );
 }
 

@@ -17,10 +17,11 @@ const isFulltime = true;
 // When do you usually finish your lunch? eg. 1140
 const timeWhenLunchIsOver = 1130;
 // Set your '_oauth2_proxy_kc_sso_livesport_eu' cookie from https://report.livesport.eu/absences/
-const reportCookie = '';
+const reportCookie =
+  'X29hdXRoMl9wcm94eV9rY19zc29fbGl2ZXNwb3J0X2V1LTQ2MzUwNTYyNDk5ZmRkM2M0ZmZhYjQ3YjFlNDdiMWQ1LnkzV2lTUE5OX2xuZ3FXWmVPZnktX3c=|1692032027|JU19xx1h2sfn_z56ep6T2ALgMUZNUfNjzjysd787fHM=';
 // Set your login credentials from https://aspira.septim.cz/login
-const user = '';
-const password = '';
+const user = 'tomas.novotny@livesport.eu';
+const password = 'tnovotny';
 // Set which options should be counted as absences (true = counted, false = not counted)
 const absencesDurationConfig = {
   'celý den': true,

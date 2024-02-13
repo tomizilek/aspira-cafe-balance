@@ -1,4 +1,10 @@
 const HOLIDAY_DATES_2023 = require('./constants').HOLIDAY_DATES_2023;
+const absences = [
+  { date: { day: 14, month: 2, year: 2024 }, type: 'home office', duration: 'celý den' },
+  { date: { day: 16, month: 2, year: 2024 }, type: 'home office', duration: 'celý den' },
+  { date: { day: 23, month: 2, year: 2024 }, type: 'home office', duration: 'celý den' },
+  { date: { day: 23, month: 3, year: 2024 }, type: 'home office', duration: 'celý den' },
+];
 
 const returnWeekDates = () => {
   const now = new Date();
@@ -15,22 +21,24 @@ const returnWeekDates = () => {
     }
     date.setDate(date.getDate() + 1);
   }
+
+  // console.log('🚀 ~ returnWeekDates ~ dates:', dates);
   return dates;
 };
 
 const returnWorkDates = () => {
   const weekDatesInCurrentMonth = returnWeekDates();
-  return weekDatesInCurrentMonth.filter(
-    (day) => !HOLIDAY_DATES_2023.includes(day)
-  );
+  return weekDatesInCurrentMonth.filter((day) => !HOLIDAY_DATES_2023.includes(day));
 };
 
 const returnDaysFromDates = (dates) => {
   const days = [];
   dates.forEach((date) => {
     const day = date.split('.')[0];
-    days.push(day);
+    days.push(Number(day));
   });
+
+  // console.log('🚀 ~ returnDaysFromDates ~ days:', days);
   return days;
 };
 
@@ -46,8 +54,7 @@ const returnFirstCountedDay = () => {
   const now = new Date();
   const date = now.getDate();
   const hours = now.getHours();
-  const minutes =
-    now.getMinutes() < 10 ? `0${now.getMinutes()}` : now.getMinutes();
+  const minutes = now.getMinutes() < 10 ? `0${now.getMinutes()}` : now.getMinutes();
   const time = Number(`${hours}${minutes}`);
 
   return time < 1140 ? date : date + 1;
@@ -56,12 +63,23 @@ const returnFirstCountedDay = () => {
 const returnNumberOfRemainingWorkDays = () => {
   const workDays = returnWorkDays();
   const firstCountedDay = returnFirstCountedDay();
-  const remainingWorkDays = workDays.filter(
-    (day) => day >= firstCountedDay
-  );
+  const remainingWorkDays = workDays.filter((day) => day >= firstCountedDay);
 
   return remainingWorkDays.length;
 };
+
+const returnWorkDaysWithoutAbsences = () => {
+  const workDays = returnWorkDays();
+  const currentMonth = new Date().getMonth() + 1;
+
+  const currentMonthAbsenceDays = absences
+    .filter((absence) => absence.date.month === currentMonth)
+    .map((absence) => absence.date.day);
+
+  return workDays.filter((day) => !currentMonthAbsenceDays.includes(day));
+};
+
+console.log('work days without absences: ', returnWorkDaysWithoutAbsences());
 
 module.exports = {
   returnNumberOfRemainingWorkDays,

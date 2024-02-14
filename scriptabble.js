@@ -195,7 +195,10 @@ function returnRemainingWorkDaysAndAbsences(absences) {
   if (absences) {
     remainingAbsences = absences
       .filter(
-        (absence) => absence.date.month === currentMonth && absence.date.day >= firstCountedDay
+        (absence) =>
+          absence.date.year === currentYear &&
+          absence.date.month === currentMonth &&
+          absence.date.day >= firstCountedDay
       )
       .map((absence) => absence.date.day);
   }

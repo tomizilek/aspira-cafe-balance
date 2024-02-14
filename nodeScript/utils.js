@@ -79,8 +79,6 @@ const returnWorkDaysWithoutAbsences = () => {
   return workDays.filter((day) => !currentMonthAbsenceDays.includes(day));
 };
 
-console.log('work days without absences: ', returnWorkDaysWithoutAbsences());
-
 module.exports = {
   returnNumberOfRemainingWorkDays,
 };

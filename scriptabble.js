@@ -13,8 +13,8 @@ Changelog:
 2.0.0: Absences from Report and balance per day
 -------------------------------------------------------------- */
 // Set your login credentials from https://aspira.septim.cz/login
-const user = 'tomas.novotny@livesport.eu';
-const password = 'tnovotny';
+const user = '';
+const password = '';
 
 // Set this parameter to true if your working mode is full-time, or false otherwise.
 const isFulltime = true;
@@ -23,9 +23,10 @@ const isFulltime = true;
 const timeWhenLunchIsOver = 1130;
 
 // Set this to true if you want to calculate daily balance based on your absences (to be used with chrome extension)
-const useAbsencesToCalculateDailyBalance = true;
+const useAbsencesToCalculateDailyBalance = false;
+
 // jsonBlob URL where you get your absences for more precise calculation of daily balance (to be used with chrome extension)
-const absencesBlobUrl = 'https://jsonblob.com/api/jsonBlob/1186343823378079744';
+const absencesBlobUrl = '';
 
 const HOLIDAY_DATES = {
   2024: [

@@ -82,7 +82,6 @@ if (useAbsencesToCalculateDailyBalance) {
   const absencesRes = await absencesReq.loadJSON();
   absences = absencesRes.absences;
 }
-console.log(absences);
 
 // WIDGET ---------------------------------------------
 let widget = createWidget(balance, isFulltime);

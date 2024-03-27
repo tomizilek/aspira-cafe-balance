@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Save absences",
+  "description": "Save your report absences for unauthenticated access.",
+  "version": "1.0",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": "report-favicon.png"
+  },
+  "permissions": ["scripting", "activeTab", "cookies"],
+  "host_permissions": ["*://*.report.livesport.eu/"]
+}

@@ -12,15 +12,20 @@ Aspira Cafe balance
 Changelog:
 2.0.0: Absences from Report and balance per day
 -------------------------------------------------------------- */
-// Set this parameter to true if your working mode is full-time, or false otherwise.
-const isFulltime = true;
-// When do you usually finish your lunch? eg. 1140
-const timeWhenLunchIsOver = 1130;
-// jsonBlob URL where you update your '_oauth2_proxy_kc_sso_livesport_eu' cookie from https://report.livesport.eu/absences/
-const reportDataUrl = 'https://jsonblob.com/api/jsonBlob/1186343823378079744';
 // Set your login credentials from https://aspira.septim.cz/login
 const user = 'tomas.novotny@livesport.eu';
 const password = 'tnovotny';
+
+// Set this parameter to true if your working mode is full-time, or false otherwise.
+const isFulltime = true;
+
+// When do you usually finish your lunch? eg. 1140
+const timeWhenLunchIsOver = 1130;
+
+// Set this to true if you want to calculate daily balance based on your absences (to be used with chrome extension)
+const useAbsencesToCalculateDailyBalance = true;
+// jsonBlob URL where you get your absences for more precise calculation of daily balance (to be used with chrome extension)
+const absencesBlobUrl = 'https://jsonblob.com/api/jsonBlob/1186343823378079744';
 
 const HOLIDAY_DATES = {
   2024: [
@@ -69,10 +74,10 @@ req.headers = {
 const res = await req.loadJSON();
 const balance = res.balance;
 
-// REPORT DATA REQUEST -------------------------------------
-const reportReq = new Request(reportDataUrl);
-const reportRes = await reportReq.loadJSON();
-const { absences } = reportRes;
+// ABSENCES REQUEST -------------------------------------
+const absencesReq = new Request(absencesBlobUrl);
+const absencesRes = await absencesReq.loadJSON();
+const { absences } = absencesRes;
 
 // WIDGET ---------------------------------------------
 let widget = createWidget(balance, isFulltime);
@@ -109,21 +114,25 @@ function createWidget(balance, isFulltime) {
     remainingWorkDays > 0 ? Number(rounded / remainingWorkDays).toFixed(0) : rounded;
   let balancePerDayTxt = w.addText(balanceForDay + ' per day');
   w.addSpacer(1);
-  let remainingDaysTxt = w.addText(`${remainingWorkDays} days left (${remainingAbsences} abs.)`);
+  let remainingDaysTxt = useAbsencesToCalculateDailyBalance
+    ? w.addText(`${remainingWorkDays} days left (${remainingAbsences} abs.)`)
+    : '';
 
   w.addSpacer(6);
 
   amountTxt.textColor = Color.orange();
   balancePerDayTxt.textColor = Color.gray();
-  remainingDaysTxt.textColor = Color.darkGray();
   amountTxt.font = Font.systemFont(24);
   balancePerDayTxt.font = Font.systemFont(12);
-  remainingDaysTxt.font = Font.systemFont(10);
   amountTxt.minimumScaleFactor = 0.3;
   amountTxt.lineLimit = 1;
   amountTxt.centerAlignText();
   balancePerDayTxt.centerAlignText();
-  remainingDaysTxt.centerAlignText();
+  if (useAbsencesToCalculateDailyBalance) {
+    remainingDaysTxt.textColor = Color.darkGray();
+    remainingDaysTxt.font = Font.systemFont(10);
+    remainingDaysTxt.centerAlignText();
+  }
 
   w.addSpacer();
 

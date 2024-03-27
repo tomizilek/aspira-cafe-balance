@@ -75,9 +75,13 @@ const res = await req.loadJSON();
 const balance = res.balance;
 
 // ABSENCES REQUEST -------------------------------------
-const absencesReq = new Request(absencesBlobUrl);
-const absencesRes = await absencesReq.loadJSON();
-const { absences } = absencesRes;
+let absences = [];
+if (useAbsencesToCalculateDailyBalance) {
+  const absencesReq = new Request(absencesBlobUrl);
+  const absencesRes = await absencesReq.loadJSON();
+  absences = absencesRes.absences;
+}
+console.log(absences);
 
 // WIDGET ---------------------------------------------
 let widget = createWidget(balance, isFulltime);

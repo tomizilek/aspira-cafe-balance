@@ -6,7 +6,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
 const reportUrl = 'https://report.livesport.eu';
 // your personal json blob url where you update and then access your report absences (must be the same url as in scriptabble.js)
-const absencesDataUrl = '';
+const absencesBlobUrl = '';
 
 // When the user clicks on the extension action
 chrome.action.onClicked.addListener(async (tab) => {
@@ -20,7 +20,7 @@ chrome.action.onClicked.addListener(async (tab) => {
         if (cookie) {
           const absences = await getAbsences(cookie.value);
 
-          fetch(absencesDataUrl, {
+          fetch(absencesBlobUrl, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',

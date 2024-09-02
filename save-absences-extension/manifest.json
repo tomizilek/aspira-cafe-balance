@@ -9,6 +9,12 @@
   "action": {
     "default_icon": "report-favicon.png"
   },
+  "content_scripts": [
+    {
+      "matches": ["https://report.livesport.eu/absences/*"],
+      "js": ["content-script.js"]
+    }
+  ],
   "permissions": ["scripting", "activeTab", "cookies"],
   "host_permissions": ["*://*.report.livesport.eu/"]
 }

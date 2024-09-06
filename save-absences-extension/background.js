@@ -6,50 +6,11 @@ chrome.runtime.onInstalled.addListener(() => {
 
 const reportUrl = 'https://report.livesport.eu';
 // your personal json blob url where you update and then access your report absences (must be the same url as in scriptabble.js)
-const absencesDataUrl = 'https://jsonblob.com/api/jsonBlob/1186343823378079744';
-
-// When the user clicks on the extension action
-// chrome.action.onClicked.addListener(async (tab) => {
-//   if (tab.url.startsWith(reportUrl)) {
-//     chrome.cookies.get(
-//       {
-//         url: tab.url,
-//         name: '_oauth2_proxy_kc_sso_livesport_eu',
-//       },
-//       async (cookie) => {
-//         if (cookie) {
-//           const absences = await getAbsences(cookie.value);
-
-//           fetch(absencesBlobUrl, {
-//             method: 'PUT',
-//             headers: {
-//               'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify({
-//               absences: absences,
-//               lastUpdated: new Date().toISOString().split('T')[0],
-//             }),
-//           }).then(async (absencesDataResponse) => {
-//             if (!absencesDataResponse.ok) {
-//               throw new Error('Network response was not ok');
-//             }
-
-//             await chrome.action.setBadgeText({
-//               tabId: tab.id,
-//               text: '✅',
-//             });
-//           });
-//         } else {
-//           console.error('Cookie not found.');
-//         }
-//       }
-//     );
-//   }
-// });
+const absencesBlobUrl = '';
 
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
-  if (request.action === 'absences_saved') {
-    console.log('absences_saved');
+  if (request.action === 'absences_edited') {
+    console.log('absences_edited');
     const tab = sender.tab;
 
     if (tab.url.startsWith(reportUrl)) {

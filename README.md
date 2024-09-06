@@ -18,7 +18,7 @@ The repository also includes a Chrome extension that allows you to extract the h
 
 ## Chrome Extension
 
-1. Create a new JSON Blob at https://jsonblob.com/new and save it. Copy the ID of the provided URL and change this url accordingly `https://jsonblob.com/api/{ID}`.
+1. Create a new JSON Blob at https://jsonblob.com/new and save it. Copy the ID of the provided URL and change this url accordingly `https://jsonblob.com/api/jsonBlob/{ID}`.
 2. Download the `save-absences-extension` folder from this repository and save it locally.
 3. Change the `absencesBlobUrl` variable in the `scriptable.js` file to the URL from the first step.
 4. Change the `absencesBlobUrl` variable in the `background.js` file (located inside the `save-absences-extension` folder) to the URL from the first step.

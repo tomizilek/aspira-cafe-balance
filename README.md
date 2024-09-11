@@ -22,6 +22,6 @@ The repository also includes a Chrome extension that allows you to extract the h
 2. Download the `save-absences-extension` folder from this repository and save it locally.
 3. Change the `absencesBlobUrl` variable in the `scriptable.js` file to the URL from the first step.
 4. Change the `absencesBlobUrl` variable in the `background.js` file (located inside the `save-absences-extension` folder) to the URL from the first step.
-5. Open the Chrome Extensions page (`chrome://extensions/`) and enable the Developer mode.
+5. Open the Chrome Extensions page (`chrome://extensions/`) and enable Developer mode.
 6. Click on the "Load unpacked" button and select the `save-absences-extension` folder that you downloaded in the second step.
-7. If you click on the extension icon in the Chrome toolbar while you are on your absences page in the Report tool (https://report.livesport.eu/absences/), the extension will save your home offices and vacations to the JSON Blob and your widget will use the data in the daily budget calculation.
+7. When you add/remove vacations and home offices in the Report tool (https://report.livesport.eu/absences), the extension script runs automatically. You can also click on it in the Chrome toolbar to run it manually (again, you need to be at https://report.livesport.eu/absences). When run correctly (you should see a checkmark attached to the extension icon), the extension will save your home offices and vacations from the Report table "Upcoming absences" to the JSON Blob and your widget will use the data in the daily budget calculation.

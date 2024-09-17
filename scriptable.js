@@ -23,7 +23,7 @@ const isFulltime = true;
 const timeWhenLunchIsOver = 1130;
 
 // Set this to true if you want to calculate daily balance based on your absences (to be used with chrome extension)
-const useAbsencesToCalculateDailyBalance = true;
+const useAbsencesToCalculateDailyBalance = false;
 
 // jsonBlob URL where you get your absences for more precise calculation of daily balance (to be used with chrome extension)
 const absencesBlobUrl = '';
